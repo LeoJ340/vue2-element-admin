@@ -1,8 +1,8 @@
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
-const user = require('./user')
-const table = require('./table')
+const user = require('./api/user')
+const table = require('./api/table')
 
 const mocks = [
   ...user,
@@ -29,7 +29,7 @@ function mockXHR() {
 
   function XHR2ExpressReqWrap(respond) {
     return function(options) {
-      let result = null
+      let result
       if (respond instanceof Function) {
         const { body, type, url } = options
         // https://expressjs.com/en/4x/api.html#req
