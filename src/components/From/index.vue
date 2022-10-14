@@ -1,22 +1,28 @@
 <template>
-  <div :class="['tool_bar', inline ? 'inline': '']">
-    <div class="tool_bar_inputs">
-      <ToolbarInputs :default-value="value" :configs="inputs" @change="onChange" @onEnter="onClick" />
+  <div :class="['v-from', inline ? 'inline': '']">
+    <div class="input-items">
+      <InputItem
+        v-for="inputItem in inputs"
+        :key="inputItem.label"
+        :input-item="inputItem"
+        :value="value"
+        @change="onChange"
+        @onEnter="onClick"
+      />
     </div>
-    <div class="tool_bar_options">
-      <ToolbarBtns :configs="buttons" @onClick="onClick" />
-    </div>
+    <BtnGroup :configs="buttons" @onClick="onClick" />
   </div>
 </template>
 
 <script>
-import ToolbarBtns from './Buttons'
-import ToolbarInputs from './Inputs'
+import BtnGroup from './BtnGroup'
+import InputItem from './InputItem'
 
 export default {
+  name: 'From',
   components: {
-    ToolbarBtns,
-    ToolbarInputs
+    BtnGroup,
+    InputItem
   },
   provide() {
     return {
@@ -32,7 +38,7 @@ export default {
       type: Boolean,
       default: false
     },
-    // 输入框配置
+    // 输入框组配置
     inputs: {
       type: Array,
       default: () => []
@@ -41,20 +47,11 @@ export default {
     buttons: {
       type: Array,
       default: () => []
-    },
-    initValue: {
-      type: Object,
-      default: () => {}
     }
   },
   data() {
     return {
-      value: this.initValue || {}
-    }
-  },
-  watch: {
-    initValue(value) {
-      this.value = value
+      value: {}
     }
   },
   methods: {
@@ -84,11 +81,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tool_bar {
+.v-from {
   &.inline {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+  }
+  .input-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
 </style>

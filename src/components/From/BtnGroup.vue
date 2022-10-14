@@ -1,5 +1,5 @@
 <template>
-  <div class="tool_btns">
+  <div class="btn-group">
     <el-button
       v-for="button in buttons"
       :key="button.name"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { BUTTONS } from '../config/constant'
+import { BUTTONS } from './config/constant'
 
 export default {
   inject: ['globalSize'],
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tool_btns{
+.btn-group{
   display: flex;
   align-items: center;
   justify-content: flex-start;
