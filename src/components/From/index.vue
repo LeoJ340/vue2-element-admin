@@ -7,7 +7,6 @@
         :input-item="inputItem"
         :value="value"
         @change="onChange"
-        @onEnter="onClick"
       />
     </div>
     <BtnGroup :configs="buttons" @onClick="onClick" />
