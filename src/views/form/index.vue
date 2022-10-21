@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import From from '@/components/From'
-import from from '@/components/From/config'
+import From from '@/components/Form'
+import from from '@/components/Form/config'
 
 export default {
   components: {
