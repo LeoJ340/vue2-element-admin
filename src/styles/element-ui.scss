@@ -47,3 +47,19 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+// large checkbox
+.el-checkbox.large {
+  .el-checkbox__inner {
+    width: 24px;
+    height: 24px;
+  }
+  .el-checkbox__inner::after {
+    left: 50%;
+    top: calc(50% - 2px);
+    transform: translate(-50%, -50%) rotate(45deg);
+    font-size: 24px;
+    width: 6px;
+    height: 12px;
+  }
+}

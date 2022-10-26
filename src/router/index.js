@@ -91,6 +91,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/list',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'List',
+        component: () => import('@/views/list/index'),
+        meta: { title: 'List', icon: 'el-icon-s-grid' }
+      }
+    ]
+  },
+
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',

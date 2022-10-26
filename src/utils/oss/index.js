@@ -54,9 +54,14 @@ async function uploadList(files, path = '', cb = (uid, progress) => {
   return await Promise.all(tasks)
 }
 
+async function getList() {
+  return await client.list()
+}
+
 export const OSSPlugin = {
   install(Vue) {
     Vue.prototype.$oss = {
+      getList,
       uploadOne,
       uploadList
     }
