@@ -20,7 +20,7 @@
         @onSelect="onSelect"
       >
         <template v-slot:mark>
-          <div class="image_mask">
+          <div class="image_mask" @click="openViewer(image.id)">
             <div class="mark_wrapper">
               <span v-for="(tag, i) in image.tags" :key="i">#{{ tag }}</span>
             </div>
@@ -28,7 +28,12 @@
         </template>
       </ImageItem>
     </div>
-
+    <ElImageViewer
+      v-show="showViewer"
+      :url-list="images.map(image => image.url)"
+      :initial-index="previewIndex"
+      :on-close="closeViewer"
+    />
   </div>
 </template>
 
@@ -38,7 +43,8 @@ import ImageItem from './ImageItem'
 export default {
   name: 'ImageList',
   components: {
-    ImageItem
+    ImageItem,
+    ElImageViewer: () => import('./ImageViewer')
   },
   props: {
     images: {
@@ -48,7 +54,9 @@ export default {
   },
   data() {
     return {
-      list: []
+      list: [],
+      showViewer: false,
+      previewIndex: 0
     }
   },
   computed: {
@@ -81,6 +89,15 @@ export default {
           image.select = val
         }
       })
+    },
+    openViewer(id) {
+      this.previewIndex = this.images.findIndex(image => image.id === id)
+      this.showViewer = true
+      document.body.style.overflow = 'hidden'
+    },
+    closeViewer() {
+      this.showViewer = false
+      document.body.style.overflow = 'auto'
     }
   }
 }
