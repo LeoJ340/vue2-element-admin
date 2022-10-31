@@ -58,12 +58,22 @@ async function getList() {
   return await client.list()
 }
 
+async function removeOne(fileName) {
+  return await client.delete(fileName)
+}
+
+async function removeList(fileNames) {
+  return await client.deleteMulti(fileNames)
+}
+
 export const OSSPlugin = {
   install(Vue) {
     Vue.prototype.$oss = {
       getList,
       uploadOne,
-      uploadList
+      uploadList,
+      removeOne,
+      removeList
     }
   }
 }
