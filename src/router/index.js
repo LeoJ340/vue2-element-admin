@@ -155,9 +155,26 @@ export const constantRoutes = [
       },
       {
         path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
+        // 路由父组件
+        component: {
+          render: c => c('router-view')
+        },
         name: 'Menu2',
-        meta: { title: 'menu2' }
+        meta: { title: 'Menu2' },
+        children: [
+          {
+            path: 'menu2-1',
+            component: () => import('@/views/nested/menu2/menu2-1'),
+            name: 'Menu2-1',
+            meta: { title: 'Menu2-1' }
+          },
+          {
+            path: 'menu2-2',
+            component: () => import('@/views/nested/menu2/menu2-2'),
+            name: 'Menu2-2',
+            meta: { title: 'Menu2-2' }
+          }
+        ]
       }
     ]
   },
