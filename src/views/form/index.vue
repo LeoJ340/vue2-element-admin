@@ -1,45 +1,68 @@
 <template>
   <div class="app-container">
-    <From :inputs="inputs" :buttons="buttons" @onClick="onClick" @onChange="onChange" />
+    <SearchForm
+      :inputs="searchInputs"
+      :buttons="searchButtons"
+      button-position="form-end"
+      :rules="searchRules"
+      @click="clickForm"
+    />
   </div>
 </template>
 
 <script>
-import From from '@/components/Form'
-import from from '@/components/Form/config'
+import SearchForm from '@/components/Form/index.vue'
+import form from '@/components/Form/index.js'
 
 export default {
   components: {
-    From
+    SearchForm
   },
   data() {
-    return {}
+    const emailValid = (rule, value, callback) => {
+      if (!value) callback()
+      if (!this.$validator.email(value)) {
+        callback(new Error('邮箱格式有误'))
+      }
+    }
+    return {
+      checkList: [],
+      searchRules: {
+        email: [{ validator: emailValid, trigger: 'change' }]
+      }
+    }
   },
   computed: {
-    inputs() {
+    searchInputs() {
       return [
-        from.builder.input({ name: 'name', label: '姓名' }),
-        from.builder.select({ name: 'sex', label: '性别', options: [{ label: '男', value: '1' }, { label: '女', value: '2' }] })
+        form.input('名称', 'name', { clearable: true }),
+        form.radio('性别', 'gender', [
+          { label: '男', value: '1' },
+          { label: '女', value: '0' }
+        ]),
+        form.select('工作', 'job', ['前端工程师', 'Java工程师', '产品经理', '技术总监'].map(i => {
+          return { label: i, value: i }
+        })),
+        form.time('date', '生日', 'date'),
+        form.input('邮箱', 'email', { clearable: true })
       ]
     },
-    buttons() {
-      return [from.BUTTONS.reset, from.BUTTONS.query, from.BUTTONS.delete]
+    searchButtons() {
+      return [
+        form.BUTTONS.reset,
+        form.BUTTONS.query
+      ]
     }
   },
   methods: {
-    onClick(name, value) {
-      console.log(name, value)
-    },
-    onChange(value) {
-      console.log('onChange', value)
+    clickForm(name, formData) {
+      console.log(name, formData)
     }
   }
 }
 </script>
 
 <style scoped>
-.line{
-  text-align: center;
-}
+
 </style>
 
