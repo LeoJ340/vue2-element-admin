@@ -129,7 +129,7 @@ export default {
   },
   computed: {
     btnPosition() {
-      if (!btnPositionValidator(this.buttonPosition)) {
+      if (!this.inline || !btnPositionValidator(this.buttonPosition)) {
         return 'form-end'
       }
       return this.buttonPosition

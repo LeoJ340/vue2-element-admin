@@ -1,10 +1,22 @@
 <template>
   <div class="app-container">
+    <h3 class="title">内联表单</h3>
     <SearchForm
       :inputs="searchInputs"
       :buttons="searchButtons"
       button-position="form-end"
       :rules="searchRules"
+      @click="clickForm"
+    />
+    <el-divider />
+    <h3 class="title">纵向表单</h3>
+    <SearchForm
+      :inline="false"
+      :inputs="searchInputs"
+      :buttons="searchButtons"
+      button-position="right"
+      :rules="searchRules"
+      style="width: 300px"
       @click="clickForm"
     />
   </div>
@@ -63,6 +75,8 @@ export default {
 </script>
 
 <style scoped>
-
+.title {
+  font-weight: 500;
+}
 </style>
 
