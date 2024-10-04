@@ -29,6 +29,7 @@
         </el-radio-group>
         <!-- 日期|时间选择器 -->
         <Time v-if="input.type === 'time'" v-model="formData[input.prop]" :config="input" />
+        <Checkbox v-if="input.type === 'checkbox'" v-model="formData[input.prop]" :config="input" />
       </el-form-item>
       <!-- 位于form内的按钮组 -->
       <el-form-item v-if="btnPosition === 'form-end'">
@@ -73,9 +74,10 @@ function btnPositionValidator(position) {
 }
 
 import Time from './Time'
+import Checkbox from './Checkbox'
 export default {
   name: 'SearchForm',
-  components: { Time },
+  components: { Time, Checkbox },
 
   props: {
     inline: {

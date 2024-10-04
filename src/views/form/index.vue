@@ -16,7 +16,7 @@
       :buttons="searchButtons"
       button-position="right"
       :rules="searchRules"
-      style="width: 300px"
+      style="width: 500px"
       @click="clickForm"
     />
   </div>
@@ -56,7 +56,10 @@ export default {
           return { label: i, value: i }
         })),
         form.time('date', '生日', 'date'),
-        form.input('邮箱', 'email', { clearable: true })
+        form.input('邮箱', 'email', { clearable: true }),
+        form.checkbox('技能', 'tech', ['js', 'vue', 'react', 'ts', 'angular'].map(t => {
+          return { label: t, value: t }
+        }), true)
       ]
     },
     searchButtons() {

@@ -91,6 +91,28 @@ function time(tagName, label, prop, opts = {}) {
   }
 }
 
+/**
+ * el-checkbox 配置项
+ * @param {string} label
+ * @param {string} prop
+ * @param {array} options 选项项列表
+ * @param {boolean} indeterminate
+ * @param {object} opts 组件原生配置
+ */
+function checkbox(label, prop, options, indeterminate, opts = {}) {
+  const { disabled } = opts
+  return {
+    type: 'checkbox',
+    label,
+    prop,
+    options,
+    indeterminate,
+    opts: Object.assign(opts, {
+      disabled: disabled !== undefined
+    })
+  }
+}
+
 function button(opts) {
   const { name, type, text, icon } = opts
   return {
@@ -133,4 +155,4 @@ const BUTTONS = {
   }
 }
 
-export default { input, select, radio, cascader, time, button, BUTTONS }
+export default { input, select, radio, cascader, time, checkbox, button, BUTTONS }
