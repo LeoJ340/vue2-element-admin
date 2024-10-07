@@ -97,7 +97,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'List',
-        component: () => import('@/views/list/index'),
+        component: () => import('@/views/imgList/index'),
         meta: { title: 'List', icon: 'el-icon-s-grid' }
       }
     ]
