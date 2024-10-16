@@ -162,7 +162,7 @@ export default {
     },
     async validate() {
       try {
-        return this.$refs.form.validate()
+        return await this.$refs.form.validate()
       } catch (e) {
         return false
       }
