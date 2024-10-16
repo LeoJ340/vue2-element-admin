@@ -1,6 +1,6 @@
 <template>
   <div class="search-form" :class="{ 'flex-between': btnPosition === 'right' }">
-    <el-form ref="searchForm" :inline="inline" :model="formData" :rules="rules" :label-width="labelWidth">
+    <el-form ref="form" :inline="inline" :model="formData" :rules="rules" :label-width="labelWidth">
       <el-form-item
         v-for="input in inputs"
         :key="input.label"
@@ -30,6 +30,7 @@
         <!-- 日期|时间选择器 -->
         <Time v-if="input.type === 'time'" v-model="formData[input.prop]" :config="input" />
         <Checkbox v-if="input.type === 'checkbox'" v-model="formData[input.prop]" :config="input" />
+        <slot v-if="input.slot" :name="input.slot" :form-data="formData" />
       </el-form-item>
       <!-- 位于form内的按钮组 -->
       <el-form-item v-if="btnPosition === 'form-end'">
@@ -76,7 +77,7 @@ function btnPositionValidator(position) {
 import Time from './Time'
 import Checkbox from './Checkbox'
 export default {
-  name: 'SearchForm',
+  name: 'Form',
   components: { Time, Checkbox },
 
   props: {
@@ -158,6 +159,12 @@ export default {
         ret[item.prop] = ''
       })
       this.formData = ret
+    },
+    async validate() {
+      return this.$refs.form.validate()
+    },
+    clearValidate() {
+      this.$refs.form.clearValidate()
     }
   }
 }

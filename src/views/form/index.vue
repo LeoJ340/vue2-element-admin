@@ -2,12 +2,17 @@
   <div class="app-container">
     <h3 class="title">内联表单</h3>
     <SearchForm
+      ref="lineForm"
       :inputs="searchInputs"
       :buttons="searchButtons"
       button-position="form-end"
       :rules="searchRules"
       @click="clickForm"
-    />
+    >
+      <template #slot="{ formData }">
+        <el-input v-model="formData.slot" />
+      </template>
+    </SearchForm>
     <el-divider />
     <h3 class="title">纵向表单</h3>
     <SearchForm
@@ -18,7 +23,11 @@
       :rules="searchRules"
       style="width: 500px"
       @click="clickForm"
-    />
+    >
+      <template #slot="{ formData }">
+        <el-input v-model="formData.slot" />
+      </template>
+    </SearchForm>
   </div>
 </template>
 
@@ -40,7 +49,8 @@ export default {
     return {
       checkList: [],
       searchRules: {
-        email: [{ validator: emailValid, trigger: 'change' }]
+        email: [{ validator: emailValid, trigger: 'change' }],
+        slot: [{ required: true, trigger: 'change' }]
       }
     }
   },
@@ -59,7 +69,12 @@ export default {
         form.input('邮箱', 'email', { clearable: true }),
         form.checkbox('技能', 'tech', ['js', 'vue', 'react', 'ts', 'angular'].map(t => {
           return { label: t, value: t }
-        }), true)
+        }), true),
+        {
+          label: '插槽项',
+          prop: 'slot',
+          slot: 'slot'
+        }
       ]
     },
     searchButtons() {
