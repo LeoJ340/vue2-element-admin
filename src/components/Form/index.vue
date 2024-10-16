@@ -161,7 +161,11 @@ export default {
       this.formData = ret
     },
     async validate() {
-      return this.$refs.form.validate()
+      try {
+        return this.$refs.form.validate()
+      } catch (e) {
+        return false
+      }
     },
     clearValidate() {
       this.$refs.form.clearValidate()
