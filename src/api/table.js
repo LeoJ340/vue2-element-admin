@@ -7,3 +7,11 @@ export function getList(params) {
     params
   })
 }
+
+export function getTreeList(params) {
+  return request({
+    url: '/vue-admin-template/table/treeList',
+    method: 'get',
+    params
+  })
+}

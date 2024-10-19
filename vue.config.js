@@ -30,7 +30,7 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
+    port,
     open: true,
     overlay: {
       warnings: false,
@@ -42,7 +42,7 @@ module.exports = {
     devtool: 'souce-map',
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
-    name: name,
+    name,
     resolve: {
       alias: {
         '@': resolve('src')
