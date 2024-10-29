@@ -1,4 +1,5 @@
 'use strict'
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
@@ -50,6 +51,7 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+    config.plugin('SpeedMeasurePlugin').use(SpeedMeasurePlugin)
     // it can improve the speed of the first screen, it is recommended to turn on preload
     config.plugin('preload').tap(() => [
       {
