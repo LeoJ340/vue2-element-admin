@@ -15,3 +15,11 @@ export function getTreeList(params) {
     params
   })
 }
+
+export function getUserList(params) {
+  return request({
+    url: '/vue-admin-template/table/userList',
+    method: 'get',
+    params
+  })
+}

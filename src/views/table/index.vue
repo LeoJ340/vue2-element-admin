@@ -7,8 +7,9 @@
       <el-tab-pane label="树形表格" name="tree">
         <TreeTable />
       </el-tab-pane>
-      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+      <el-tab-pane label="多级表头" name="third">
+        <TreeHeadTable />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -16,11 +17,13 @@
 <script>
 import NormalTable from './components/Normal'
 import TreeTable from './components/TreeTable'
+import TreeHeadTable from './components/TreeHeadTable.vue'
 
 export default {
   components: {
     NormalTable,
-    TreeTable
+    TreeTable,
+    TreeHeadTable
   },
   data() {
     return {

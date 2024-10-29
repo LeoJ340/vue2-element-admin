@@ -30,6 +30,8 @@
           <slot :name="col.slotName" :row="row" />
         </template>
       </el-table-column>
+      <!-- 自定义列 -->
+      <slot />
       <!-- 操作列 -->
       <el-table-column
         v-if="hasHandler"
