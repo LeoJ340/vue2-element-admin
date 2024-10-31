@@ -88,6 +88,45 @@ const actions = {
   }
 }
 
+/**
+ * @description 生成权限路由列表
+ * @param routes
+ * @param { [{ id: String }] } permissions
+ * @returns {*[]}
+ */
+function generateRoutes(routes, permissions) {
+  const accessRouters = []
+  routes.forEach(_route => {
+    const temp = { ..._route }
+    if (hasPermission(permissions, temp)) {
+      if (temp.children) {
+        temp.children = generateRoutes(temp.children, permissions)
+      }
+      accessRouters.push(temp)
+    }
+  })
+  return accessRouters
+}
+
+// 白名单列表
+const whiteRoutes = []
+/**
+ * 判断路由是否有权限
+ * @param { [{ id: String }] } permissions
+ * @param route
+ */
+function hasPermission(permissions, { name, path, meta: { menuId } = {}}) {
+  if (menuId) {
+    return permissions.some(({ id = '' }) => {
+      return id && id.trim() === menuId.trim()
+    })
+  } else {
+    // 白名单
+    if (whiteRoutes.includes(name) || whiteRoutes.includes(path)) return true
+    return true
+  }
+}
+
 export default {
   namespaced: true,
   state,
