@@ -13,7 +13,7 @@ const listTemplate = [itemTemplate]
 
 module.exports = [
   {
-    url: '/vue-admin-template/table/list',
+    url: '/api/table/list',
     type: 'get',
     response: config => {
       const { query: { size }} = config
@@ -31,7 +31,7 @@ module.exports = [
     }
   },
   {
-    url: '/vue-admin-template/table/treeList',
+    url: '/api/table/treeList',
     type: 'get',
     response: config => {
       const { query: { size }} = config
@@ -52,7 +52,7 @@ module.exports = [
     }
   },
   {
-    url: '/vue-admin-template/table/userList',
+    url: '/api/table/userList',
     type: 'get',
     response: config => {
       const { query: { size }} = config

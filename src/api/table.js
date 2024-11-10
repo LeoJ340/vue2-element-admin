@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: '/vue-admin-template/table/list',
+    url: '/api/table/list',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function getTreeList(params) {
   return request({
-    url: '/vue-admin-template/table/treeList',
+    url: '/api/table/treeList',
     method: 'get',
     params
   })
@@ -18,7 +18,7 @@ export function getTreeList(params) {
 
 export function getUserList(params) {
   return request({
-    url: '/vue-admin-template/table/userList',
+    url: '/api/table/userList',
     method: 'get',
     params
   })
