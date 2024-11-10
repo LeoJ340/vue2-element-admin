@@ -52,7 +52,7 @@ module.exports = [
     url: '/api/user/info\.*',
     type: 'get',
     response: config => {
-      const { token } = config.query
+      const { headers: { token }} = config
       const info = users[token]
 
       // mock error
