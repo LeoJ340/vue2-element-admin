@@ -56,12 +56,24 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/components',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/components/table',
+    name: 'Components',
+    meta: { title: 'Components', icon: 'el-icon-s-help' },
     children: [
+      {
+        path: 'tip',
+        name: 'TipBox',
+        component: () => import('@/views/tipBox/index'),
+        meta: { title: 'Message', icon: 'message' }
+      },
+      {
+        path: 'form',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
+      },
       {
         path: 'table',
         name: 'Table',
@@ -78,40 +90,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/images',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/message',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'TipBox',
-        component: () => import('@/views/tipBox/index'),
-        meta: { title: 'Message', icon: 'message' }
-      }
-    ]
-  },
-
-  {
-    path: '/imgList',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'List',
-        component: () => import('@/views/imgList/index'),
-        meta: { title: 'List', icon: 'el-icon-s-grid' }
+        path: '',
+        name: 'Images',
+        component: () => import('@/views/images/index'),
+        meta: { title: 'Images', icon: 'el-icon-s-grid' }
       }
     ]
   },
