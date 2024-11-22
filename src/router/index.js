@@ -91,7 +91,20 @@ export const constantRoutes = [
   },
 
   {
-    path: '/list',
+    path: '/message',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'TipBox',
+        component: () => import('@/views/tipBox/index'),
+        meta: { title: 'Message', icon: 'message' }
+      }
+    ]
+  },
+
+  {
+    path: '/imgList',
     component: Layout,
     children: [
       {

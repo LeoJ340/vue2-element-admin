@@ -38,6 +38,9 @@ Vue.use(OSSPlugin)
 import { validator } from '@/utils/validate'
 Vue.use(validator)
 
+import TipBox from '@/components/TipBox'
+Vue.use(TipBox)
+
 Vue.config.productionTip = false
 
 new Vue({
