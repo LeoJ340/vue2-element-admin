@@ -192,6 +192,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/i18n',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'I18n',
+        component: () => import('@/views/i18n/index'),
+        meta: { title: 'I18n', icon: 'international' }
+      }
+    ]
+  },
+
+  {
     path: 'external-link',
     component: Layout,
     children: [
