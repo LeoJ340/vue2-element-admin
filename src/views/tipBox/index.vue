@@ -12,12 +12,30 @@
     <el-button type="info" plain @click="elMsgBoxPrompt">提交内容</el-button>
     <h3>自定义弹窗</h3>
     <el-button type="info" plain @click="tip">自定义弹窗</el-button>
+    <h3>拖拽弹窗</h3>
+    <el-button type="info" plain @click="() => dialogVisible = true">拖拽弹窗</el-button>
+    <el-dialog
+      v-drag
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+    >
+      <span>可拖拽对话框</span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import drag from '@/directive/drag'
 export default {
   name: 'MsgBox',
+  directives: { drag },
+
+  data() {
+    return {
+      dialogVisible: false
+    }
+  },
 
   methods: {
     elMsg(type = '') {

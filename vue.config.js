@@ -37,16 +37,16 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    // before: require('./mock/mock-server.js')
-    proxy: {
-      '/dev-api': {
-        target: 'http://127.0.0.1:3000/', // 本地环境
-        changOrigin: true,
-        pathRewrite: {
-          '^/dev-api': ''
-        }
-      }
-    }
+    before: require('./mock/mock-server.js')
+    // proxy: {
+    //   '/dev-api': {
+    //     target: 'http://127.0.0.1:3000/', // 本地环境
+    //     changOrigin: true,
+    //     pathRewrite: {
+    //       '^/dev-api': ''
+    //     }
+    //   }
+    // }
   },
   configureWebpack: {
     devtool: 'souce-map',
