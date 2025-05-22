@@ -50,9 +50,14 @@ export default {
         })
         return spanMap
       }
-      this.spanMap.set('weekId', calculateSpan(['weekId'])) // 最大合并基准
-      this.spanMap.set('groupName', calculateSpan(['weekId', 'groupName']))
-      this.spanMap.set('projName', calculateSpan(['weekId', 'groupName', 'projName']))
+      // this.spanMap.set('weekId', calculateSpan(['weekId'])) // 最大合并基准
+      // this.spanMap.set('groupName', calculateSpan(['weekId', 'groupName']))
+      // this.spanMap.set('projName', calculateSpan(['weekId', 'groupName', 'projName']))
+      // 优化代码优化合并列逻辑
+      const spanColumns = ['weekId', 'groupName', 'projName']
+      spanColumns.forEach((key, index) => {
+        this.spanMap.set(key, calculateSpan(spanColumns.slice(0, index + 1)))
+      })
     },
 
     // 合并方法
