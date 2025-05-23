@@ -1,15 +1,10 @@
 import OSS from 'ali-oss'
 
-const REGION = 'oss-cn-city'
-const ACCESS_KEY_ID = 'ACCESS_KEY_ID'
-const ACCESS_KEY_SECRET = 'ACCESS_KEY_SECRET'
-const BUCKET = 'BUCKET'
-
 const client = new OSS({
-  region: REGION,
-  accessKeyId: ACCESS_KEY_ID,
-  accessKeySecret: ACCESS_KEY_SECRET,
-  bucket: BUCKET
+  region: process.env.VUE_APP_OSS_REGION,
+  accessKeyId: process.env.VUE_APP_OSS_ACCESS_KEY_ID,
+  accessKeySecret: process.env.VUE_APP_OSS_ACCESS_KEY_SECRET,
+  bucket: process.env.VUE_APP_OSS_BUCKET
 })
 
 function getSuffix(file) {
