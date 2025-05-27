@@ -1,5 +1,11 @@
 <template>
-  <el-table :data="tableData" :span-method="spanMethod">
+  <el-table
+    ref="tableRef"
+    :data="tableData"
+    :span-method="spanMethod"
+    @select="handleSelect"
+    @select-all="handleSelectAll"
+  >
     <el-table-column type="selection" width="55" />
     <el-table-column prop="logUserName" label="填报人" width="120" />
     <el-table-column prop="orgName" label="部门" width="120" />
@@ -24,6 +30,11 @@ export default {
         { weekId: 2, logUserName: '张三', orgName: '科技管理部', groupName: 'B组', projName: 'CCC系统', rate: '25%' }
       ],
       spanMap: new Map() // 存储合并信息
+    }
+  },
+  computed: {
+    selection() {
+      return this.$refs.tableRef?.selection
     }
   },
   created() {
@@ -59,7 +70,6 @@ export default {
         this.spanMap.set(key, calculateSpan(spanColumns.slice(0, index + 1)))
       })
     },
-
     // 合并方法
     spanMethod({ column, rowIndex, columnIndex }) {
       // 以最大合并基准合并列
@@ -82,6 +92,22 @@ export default {
         }
       }
       return { rowspan: 1, colspan: 1 }
+    },
+    // 处理单行勾选
+    handleSelect(selection, row) {
+      const weekId = row.weekId
+      const groupRows = this.tableData.filter(item => item.weekId === weekId)
+      const isSelected = selection.includes(row)
+      // 同步组内所有行的勾选状态
+      groupRows.forEach(item => {
+        this.$refs.tableRef.toggleRowSelection(item, isSelected)
+      })
+    },
+    // 处理全选/取消全选
+    handleSelectAll(selection) {
+      this.tableData.forEach(row => {
+        this.$refs.tableRef.toggleRowSelection(row, Boolean(selection.length))
+      })
     }
   }
 }

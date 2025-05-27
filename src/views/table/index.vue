@@ -10,7 +10,7 @@
       <el-tab-pane label="多级表头" name="third">
         <TreeHeadTable />
       </el-tab-pane>
-      <el-tab-pane label="合并表格" name="4">
+      <el-tab-pane label="合并表格" name="four">
         <SpanTable />
       </el-tab-pane>
     </el-tabs>
