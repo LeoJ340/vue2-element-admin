@@ -52,11 +52,9 @@ module.exports = [
     url: '/api/user/info\.*',
     type: 'get',
     response: config => {
-      const { headers: { token }} = config
-      const info = users[token]
+      const token = config.headers?.token
 
-      // mock error
-      if (!info) {
+      if (!token || !users[token]) {
         return {
           code: 50008,
           message: 'Login failed, unable to get user details.'
@@ -65,7 +63,7 @@ module.exports = [
 
       return {
         code: 20000,
-        data: info
+        data: users[token]
       }
     }
   },
