@@ -64,15 +64,19 @@ export function getISOYear(date) {
  * @returns {number}
  */
 export function getWeekOfYear(date) {
+  // 创建一个新的日期对象，避免修改原始日期
+  const targetDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+  // 将日期调整到最近的星期四（ISO周数计算中，周四决定周数）
+  targetDate.setUTCDate(targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7))
   // Create a new date object for January 4th of the given year
-  const jan4 = new Date(date.getFullYear(), 0, 4)
+  const jan4 = new Date(targetDate.getFullYear(), 0, 4)
   // Calculate the day of the week for January 4th (0 = Sunday, 1 = Monday, etc.)
   const jan4DayOfWeek = (jan4.getDay() + 6) % 7 // Adjust to make Monday = 0
   // Find the start of the first ISO week (Monday of the week containing January 4th)
   const startOfFirstWeek = new Date(jan4)
   startOfFirstWeek.setDate(jan4.getDate() - jan4DayOfWeek)
   // Calculate the difference in days between the given date and the start of the first ISO week
-  const diffInDays = Math.floor((date - startOfFirstWeek) / (1000 * 60 * 60 * 24))
+  const diffInDays = Math.floor((targetDate - startOfFirstWeek) / (1000 * 60 * 60 * 24))
   // Calculate the week number
   return Math.ceil((diffInDays + 1) / 7)
 }
