@@ -93,3 +93,28 @@ export function formatDate(date) {
   return `${year}-${month}-${day}`
 }
 
+/**
+ * @desc 获取指定日期的日历范围（起始周日-周六）
+ * @param date
+ * @returns [string, string]
+ */
+export function getCalendarRange(date) {
+  const inputDate = new Date(date)
+  const year = inputDate.getFullYear()
+  const month = inputDate.getMonth() // 0-11
+
+  // 获取当月第一天和最后一天
+  const firstDay = new Date(year, month, 1)
+  const lastDay = new Date(year, month + 1, 0)
+
+  // 计算日历起始日（上月补齐部分）
+  const startDayOffset = firstDay.getDay() // 0=周日, 1=周一...6=周六
+  const calendarStart = new Date(year, month, 1 - startDayOffset)
+
+  // 计算日历结束日（下月补齐部分） - 修正：在最后一天基础上直接加天数
+  const endDayOffset = 6 - lastDay.getDay()
+  const calendarEnd = new Date(lastDay)
+  calendarEnd.setDate(lastDay.getDate() + endDayOffset)
+
+  return [formatDate(calendarStart), formatDate(calendarEnd)]
+}
