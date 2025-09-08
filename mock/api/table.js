@@ -3,13 +3,12 @@ const { mock } = require('mockjs')
 const itemTemplate = {
   id: '@id',
   title: '@sentence(5, 10)',
+  content: '@sentence(10, 20)',
   'status|1': ['published', 'draft', 'deleted'],
   author: '@first',
   display_time: '@datetime',
   pageviews: '@integer(300, 5000)'
 }
-
-const listTemplate = [itemTemplate]
 
 module.exports = [
   {
@@ -19,7 +18,7 @@ module.exports = [
       const { query: { size }} = config
       const rule = `list|${size}`
       const { list } = mock({
-        [rule]: listTemplate
+        [rule]: [itemTemplate]
       })
       return {
         code: 20000,
