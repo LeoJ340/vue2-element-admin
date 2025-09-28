@@ -1,43 +1,52 @@
 <template>
   <div class="app-container">
-    <h3 class="title">内联表单</h3>
-    <SearchForm
-      ref="lineForm"
-      :inputs="searchInputs"
-      :buttons="searchButtons"
-      button-position="form-end"
-      :rules="searchRules"
-      @click="clickForm"
-    >
-      <template #slot="{ formData }">
-        <el-input v-model="formData.slot" />
-      </template>
-    </SearchForm>
+    <el-tabs v-model="activeTab" type="card">
+      <el-tab-pane label="典型表单" name="normalForm">
+        <SearchForm
+          :inline="false"
+          :inputs="searchInputs"
+          :buttons="searchButtons"
+          button-position="right"
+          :rules="searchRules"
+          style="width: 500px"
+          @click="clickForm"
+        >
+          <template #slot="{ formData }">
+            <el-input v-model="formData.slot" />
+          </template>
+        </SearchForm>
+      </el-tab-pane>
+      <el-tab-pane label="内联表单" name="inlineForm">
+        <SearchForm
+          ref="lineForm"
+          :inputs="searchInputs"
+          :buttons="searchButtons"
+          button-position="form-end"
+          :rules="searchRules"
+          @click="clickForm"
+        >
+          <template #slot="{ formData }">
+            <el-input v-model="formData.slot" />
+          </template>
+        </SearchForm>
+      </el-tab-pane>
+      <el-tab-pane label="表单嵌套表格" name="tableForm">
+        <TableForm />
+      </el-tab-pane>
+    </el-tabs>
     <el-divider />
-    <h3 class="title">纵向表单</h3>
-    <SearchForm
-      :inline="false"
-      :inputs="searchInputs"
-      :buttons="searchButtons"
-      button-position="right"
-      :rules="searchRules"
-      style="width: 500px"
-      @click="clickForm"
-    >
-      <template #slot="{ formData }">
-        <el-input v-model="formData.slot" />
-      </template>
-    </SearchForm>
   </div>
 </template>
 
 <script>
 import SearchForm from '@/components/Form/index.vue'
 import form from '@/components/Form/index.js'
+import TableForm from './TableForm.vue'
 
 export default {
   components: {
-    SearchForm
+    SearchForm,
+    TableForm
   },
   data() {
     const emailValid = (rule, value, callback) => {
@@ -47,7 +56,7 @@ export default {
       }
     }
     return {
-      checkList: [],
+      activeTab: 'inlineForm',
       searchRules: {
         email: [{ validator: emailValid, trigger: 'change' }],
         slot: [{ required: true, trigger: 'change' }]
@@ -92,9 +101,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.title {
-  font-weight: 500;
-}
-</style>
+<style scoped></style>
 
