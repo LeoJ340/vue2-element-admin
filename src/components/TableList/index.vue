@@ -1,10 +1,12 @@
 <template>
   <el-card shadow="hover" :class="{ 'no-card': !cardType }">
     <el-table
+      ref="tableRef"
       :data="tableData"
       border
       fit
       v-bind="tableOpts"
+      v-on="$listeners"
     >
       <!-- 筛选列 -->
       <el-table-column
@@ -174,6 +176,9 @@ export default {
     resetPage() {
       this.pageIndex = 1
       this.pageSize = 10
+    },
+    toggleRowSelection(row, selected) {
+      this.$refs.tableRef.toggleRowSelection(row, selected)
     }
   }
 }
