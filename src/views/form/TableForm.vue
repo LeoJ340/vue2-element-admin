@@ -101,7 +101,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.el-form-item {
-  margin-bottom: 0;
+.el-form-item.is-error {
+  margin-bottom: 22px;
 }
 </style>
